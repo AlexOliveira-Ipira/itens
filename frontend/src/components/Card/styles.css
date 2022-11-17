@@ -1,0 +1,86 @@
+
+.card{
+    background-color:#2b3138;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.contener-card{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;    
+}
+
+.titulo-itens{   
+    padding: 10px;
+    font-size: 24px;  
+}
+
+.calendario{
+    width: 100%;
+    height: 40px;
+    background-color: #d4d8db;
+    border: 1px solid cornflowerblue ;
+    border-radius: 5px;
+    padding:0 20px;
+    font-size: 15px;
+} 
+
+.contener-calendario{
+    margin-bottom: 16px;
+    max-width: 170px;
+}
+
+.container-tabelas{
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.container-tabelas thead{
+    height: 55px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.container-tabelas tbody{
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.container-tabelas tbody tr:hover > td {
+    background-color: #384459;
+}
+
+.container-tabelas tbody tr{
+    height: 40px;
+    border-top: 1px solid blue;
+}
+
+.container-tabelas tbody tr:nth-child(odd){
+    background-color: #242c38;
+}
+
+.btnEditar{
+   padding: 0 28%;    
+}
+
+.show576{
+    display: none;
+}
+
+.show992{
+    display: none;
+}
+
+@media (min-width: 576px){
+    .show576 {
+        display: table-cell;
+    }
+}
+@media (min-width: 992px){
+    .show992{
+        display: table-cell;
+    }
+}
