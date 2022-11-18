@@ -1,17 +1,33 @@
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import BotaoEditar from '../BotaoEditar';
-import './styles.css'
+import './styles.css';
 
 function Card(){
+    const [minDate, setMinDate] = useState(new Date(new Date().setDate(new Date().getDate()-365)));
+    const [maxDate, setMaxDate] = useState(new Date());
+
     return(
         <div className="card">
             <h2 className="titulo-itens">Itens</h2>                    
                 
                 <div className="contener-calendario">
-                    <input type="date" className="calendario"/>
+                    <DatePicker
+                        selected={minDate}
+                        onChange={(date: Date) => setMinDate(date)}
+                        className="calendario"
+                        dateFormat="dd/MM/yyyy"
+                    />
                 </div>
 
                 <div className="contener-calendario">
-                    <input type="date" className="calendario"/>
+                    <DatePicker
+                        selected={maxDate}
+                        onChange={(date: Date) => setMaxDate(date)}
+                        className="calendario"
+                        dateFormat="dd/MM/yyyy"
+                    />
                 </div>
 
                 <div className="dados">
