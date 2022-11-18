@@ -1,12 +1,26 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { itensModel } from "../../models/itensModel";
+import { BASE_URL } from "../../util/request";
 import BotaoEditar from '../BotaoEditar';
 import './styles.css';
 
 function Card(){
     const [minDate, setMinDate] = useState(new Date(new Date().setDate(new Date().getDate()-365)));
     const [maxDate, setMaxDate] = useState(new Date());
+
+    const [itens, setItens] = useState<itensModel[]>([]);
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/itens`)
+        .then(response => {
+            setItens(response.data.content);
+        })
+    },[]);
+
+
 
     return(
         <div className="card">
@@ -43,42 +57,24 @@ function Card(){
                         </thead>
 
                     <tbody>
-                        <tr>                                  
-                            <td className="show992">1</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Caneta</td>
-                            <td>R$ 1,00</td>
-                            <td>
-                                <div className="btnEditar">
-                                    <BotaoEditar/>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">2</td>
-                            <td className="show576" >08/07/2022</td>
-                            <td>Caderno</td>
-                            <td>R$ 40,00</td>
-                            <td>
-                                <div className="btnEditar">
-                                    <BotaoEditar/>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">3</td>
-                            <td className="show576" >08/07/2022</td>
-                            <td>Papel Oficio</td>
-                            <td>R$ 35,00</td>
-                            <td>
-                                <div className="btnEditar">
-                                    <BotaoEditar/>
-                                </div>
-                            </td>
-                            
-                        </tr>
+                        {
+                            itens.map(itemDados => {
+                                return (
+                                        <tr key={itemDados.id}>                                  
+                                            <td className="show992">{itemDados.id}</td>
+                                            <td className="show576">{new Date(itemDados.datacad).toLocaleDateString()}</td>
+                                            <td>{itemDados.nome}</td>
+                                            <td>R$ {itemDados.vlrmed.toFixed(2)}</td>
+                                            <td>
+                                                <div className="btnEditar">
+                                                    <BotaoEditar/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                )
+                            })
+                        }                                                                 
                     </tbody>
-
                 </table>
 
             </div>    
