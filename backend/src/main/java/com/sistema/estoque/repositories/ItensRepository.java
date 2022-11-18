@@ -14,7 +14,7 @@ import com.sistema.estoque.entites.Itens;
 public interface ItensRepository extends JpaRepository<Itens, Long>{
 
     //Selecionando por data inicial e final
-    @Query("select obj from Itens obj where obj.datacad between :min and :max")
+    @Query("select obj from Itens obj where obj.datacad between :min and :max order by obj.datacad")
     Page<Itens> findItensData(@Param("min") LocalDate min,
     @Param("max")  LocalDate max, Pageable pageable);
 

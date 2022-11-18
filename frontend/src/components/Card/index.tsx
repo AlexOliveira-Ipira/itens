@@ -14,13 +14,16 @@ function Card(){
     const [itens, setItens] = useState<itensModel[]>([]);
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/itens`)
+
+        const dmin = minDate.toISOString().slice(0,10);
+        const dmax = maxDate.toISOString().slice(0,10);
+
+
+        axios.get(`${BASE_URL}/itens?minDate=${dmin}&maxDate=${dmax}`)
         .then(response => {
             setItens(response.data.content);
         })
-    },[]);
-
-
+    },[minDate , maxDate]);
 
     return(
         <div className="card">
